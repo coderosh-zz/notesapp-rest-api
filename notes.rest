@@ -1,0 +1,28 @@
+GET http://localhost:3000/api/v1/notes
+
+
+### Get single note
+GET http://localhost:3000/api/v1/notes/5eb426a1f2e80f18380ee2b7
+
+
+### Create Note
+POST http://localhost:3000/api/v1/notes
+Content-Type: application/json
+
+{
+  "body": "This is a body",
+  "title": "This is a private title",
+  "isPrivate": true
+}
+
+
+### Update Note
+PATCH http://localhost:3000/api/v1/notes/5eb42477f2906a1b48593e99
+Content-Type: application/json
+
+{
+  "body": "this is a edited body from patch req"
+}
+
+### Delete Note
+DELETE http://localhost:3000/api/v1/notes/5eb42489f2906a1b48593e9a
