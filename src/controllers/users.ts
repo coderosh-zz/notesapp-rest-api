@@ -8,7 +8,7 @@ import { generateToken } from '../utils/jwt'
 
 const getAllUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const users = await User.find({})
+    const users = await User.find({}).select('-password')
 
     res.json({ success: true, users })
   } catch (e) {
@@ -67,6 +67,12 @@ const removeUser = async (req: Request, res: Response, next: NextFunction) => {
       )
     }
 
+    if (user.id !== req.uid) {
+      return next(
+        new CustomError(`You aren't authorized to acces this route`, 401)
+      )
+    }
+
     await User.findByIdAndDelete(req.params.id)
 
     res.json({ success: true, user: [] })
@@ -112,8 +118,8 @@ const loginUser = async (req: Request, res: Response, next: NextFunction) => {
     if (!user) {
       return next(new CustomError('Invalid Credentials', 401))
     }
-    const match = await compare(password, user.password)
 
+    const match = await compare(password, user.password)
     if (!match) {
       return next(new CustomError('Invalid Credentials', 401))
     }

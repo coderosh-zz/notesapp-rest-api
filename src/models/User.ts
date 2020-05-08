@@ -1,4 +1,12 @@
-import { Schema, Document, model, Model, HookNextFunction } from 'mongoose'
+import {
+  Schema,
+  Document,
+  model,
+  Model,
+  HookNextFunction,
+  mongo,
+  Types,
+} from 'mongoose'
 import { hash } from 'bcryptjs'
 
 interface IUser extends Document {
@@ -6,6 +14,7 @@ interface IUser extends Document {
   email: string
   password: string
   passwordLastUpdated: Date
+  notes: any[]
 }
 
 const UserSchema = new Schema(
@@ -29,6 +38,12 @@ const UserSchema = new Schema(
       type: Date,
       default: Date.now,
     },
+    notes: [
+      {
+        type: Types.ObjectId,
+        ref: 'Note',
+      },
+    ],
   },
   {
     timestamps: true,

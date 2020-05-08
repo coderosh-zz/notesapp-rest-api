@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
 import CustomError from '../models/CustomError'
 import { verifyToken } from '../utils/jwt'
+import User from '../models/User'
 const protectRoute = async (
   req: Request,
   res: Response,
@@ -23,10 +24,17 @@ const protectRoute = async (
 
     const decoded = verifyToken(token)
 
+    const user = await User.findById(decoded.id)
+
+    if (!user) {
+      return next(
+        new CustomError('You are not authorize to access this route', 401)
+      )
+    }
     req.uid = decoded.id
     next()
   } catch (e) {
-    next(new CustomError('Somethin went wrong', 500))
+    next(new CustomError('Something went wrong', 500))
   }
 }
 

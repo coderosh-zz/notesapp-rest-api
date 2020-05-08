@@ -1,4 +1,4 @@
-import { Schema, model, Document, Model } from 'mongoose'
+import { Schema, model, Document, Model, Types } from 'mongoose'
 
 interface IUser extends Document {
   title: string
@@ -6,6 +6,7 @@ interface IUser extends Document {
   keywords: string[]
   isPrivate: boolean
   likes: number
+  creator: string
 }
 
 const NoteSchema: Schema = new Schema(
@@ -29,6 +30,10 @@ const NoteSchema: Schema = new Schema(
     likes: {
       type: Number,
       default: 0,
+    },
+    creator: {
+      type: Types.ObjectId,
+      ref: 'User',
     },
   },
   {

@@ -23,13 +23,14 @@ Content-Type: application/json
 
 {
   "name": "Roshan JI",
-  "password": "1234566",
+  "password": "123456",
   "email": "roshan"
 }
 
 
 ### Remove User
-DELETE  http://localhost:3000/api/v1/users/5eb50d65aa28af2eb487e65b
+DELETE  http://localhost:3000/api/v1/users/5eb536aecc4d641fac001b48
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjUzNmFlY2M0ZDY0MWZhYzAwMWI0OCIsImlhdCI6MTU4ODkzNDM0NCwiZXhwIjoxNTg5MDIwNzQ0fQ.QX3e_-_MZVjqXqZyCanMQ-8XrH-dL8MREOLDwiqy_b4
 
 
 ### Login User
@@ -37,11 +38,11 @@ POST http://localhost:3000/api/v1/users/login
 Content-Type: application/json
 
 {
-  "email": "test@roshan.com",
+   "email": "test@roshan.com",
   "password": "123456"
 }
 
 
 ### Me
 GET http://localhost:3000/api/v1/users/me
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjUwZGM2YTFiN2FjMzFiYzkyZmY2OCIsImlhdCI6MTU4ODkyOTQ3MiwiZXhwIjoxNTg5MDE1ODcyfQ.flknsvuU-mFuFoLBq5UqI8hkgSSBYfBBbg_mxPlAV90
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjUzNmFlY2M0ZDY0MWZhYzAwMWI0OCIsImlhdCI6MTU4ODkzNDM0NCwiZXhwIjoxNTg5MDIwNzQ0fQ.QX3e_-_MZVjqXqZyCanMQ-8XrH-dL8MREOLDwiqy_b4

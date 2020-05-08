@@ -4,6 +4,7 @@ import mongoose from 'mongoose'
 
 import Note from '../models/Note'
 import CustomError from '../models/CustomError'
+import User from '../models/User'
 
 const getAllNotes = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -43,8 +44,21 @@ const createNote = async (req: Request, res: Response, next: NextFunction) => {
     }
 
     const { title, body, keywords, isPrivate } = req.body
-    const note = await Note.create({ title, body, keywords, isPrivate })
-    await note.save()
+
+    const note = await Note.create({
+      title,
+      body,
+      keywords,
+      isPrivate,
+      creator: req.uid,
+    })
+
+    const user = await User.findById(req.uid)
+
+    if (user) {
+      const notes = [...user.notes, note.id]
+      await user.update({ notes })
+    }
 
     res.status(201).send({ success: true, note })
   } catch (e) {
@@ -64,6 +78,12 @@ const updateNote = async (req: Request, res: Response, next: NextFunction) => {
     if (!note) {
       return next(
         new CustomError(`No note with the id of ${req.params.id} found`, 404)
+      )
+    }
+
+    if (note.creator !== req.uid) {
+      return next(
+        new CustomError(`You don't have permission to edit this note`, 401)
       )
     }
 
@@ -87,7 +107,21 @@ const deleteNote = async (req: Request, res: Response, next: NextFunction) => {
       )
     }
 
+    if (note.creator !== req.uid) {
+      return next(
+        new CustomError(`You don't have permission to delete this note`, 401)
+      )
+    }
+
     await Note.findByIdAndDelete(req.params.id)
+
+    const user = await User.findById(req.uid)
+
+    if (user) {
+      let notes = user.notes.filter(noteId => noteId !== req.params.id)
+      user.notes = notes
+      await user.update({ notes })
+    }
 
     res.send({ success: true, note: [] })
   } catch (e) {

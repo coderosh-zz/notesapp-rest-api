@@ -9,10 +9,10 @@ GET http://localhost:3000/api/v1/notes/5eb426a1f2e80f18380ee2b7
 ### Create Note
 POST http://localhost:3000/api/v1/notes
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjUwZGM2YTFiN2FjMzFiYzkyZmY2OCIsImlhdCI6MTU4ODkyNjkxMiwiZXhwIjoxNTg4OTI3ODEyfQ.ejx3MRu3htnbRA53_rKBIfdLKjthR0WFJRss2_wrfU4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjUzNmFlY2M0ZDY0MWZhYzAwMWI0OCIsImlhdCI6MTU4ODkzNDMxOSwiZXhwIjoxNTg5MDIwNzE5fQ.oSCzjopmNT7ORNlndxsNqVtrXWGRVD91-D_7UcYVqkg
 
 {
-  "body": "This is a body",
+  "body": "This is a body hai ta -2",
   "title": "This is a private title",
   "isPrivate": true
 }
@@ -21,10 +21,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjUwZGM2Y
 ### Update Note
 PATCH http://localhost:3000/api/v1/notes/5eb426a1f2e80f18380ee2b7
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjUyOWYxMTk5YTk1MDg2Y2VhMDcxOSIsImlhdCI6MTU4ODkzMTA1NywiZXhwIjoxNTg5MDE3NDU3fQ.X6UKWPJ2nLehmqb1TLhNZoWkNDNtRDwGuriJt79mDN4
 
 {
   "body": "this is a private body from patch req ok"
 }
 
 ### Delete Note
-DELETE http://localhost:3000/api/v1/notes/5eb42489f2906a1b48593e9a
+DELETE http://localhost:3000/api/v1/notes/5eb53008ae3bbd32140767d0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjUyZmU3YWUzYmJkMzIxNDA3NjdjZiIsImlhdCI6MTU4ODkzMjU4MywiZXhwIjoxNTg5MDE4OTgzfQ.9BUbzXNqw7NtWZyXZLVKIDSbQcx3gFQwWImQ_JLtBD4
