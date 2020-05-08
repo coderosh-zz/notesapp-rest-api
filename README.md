@@ -3,7 +3,7 @@
 - [x] Notes CRUD
 - [x] Users CRUD
 - [x] Validation
-- [x] Excrypt Password and JWT token
+- [x] Encrypt Password and JWT token
 - [x] Login
 - [x] Protect Routes
 - [x] Connect User and Notes
@@ -17,25 +17,26 @@
 - [x] Rate Limiting
 - [ ] Private notes security
 - [ ] Searching
+- [ ] Limit results
 - [ ] Pagination
 
-### Success Response format
+### Success Response format 🤗
 
 ```json
 {
   "success": true,
-  "...": ...
+  "...": "..."
 }
 ```
 
-### Error Response format
+### Error Response format 🙄
 
 ```json
 {
   "success": false,
   "errors": [
     {
-      ...
+      "..."
     }
   ]
 }
