@@ -1,4 +1,5 @@
-import { Schema, Document, model, Model } from 'mongoose'
+import { Schema, Document, model, Model, HookNextFunction } from 'mongoose'
+import { hash } from 'bcryptjs'
 
 interface IUser extends Document {
   name: string
@@ -24,7 +25,7 @@ const UserSchema = new Schema(
       required: true,
       trim: true,
     },
-    passwordLastUpdated: {
+    validDate: {
       type: Date,
       default: Date.now,
     },
@@ -33,6 +34,14 @@ const UserSchema = new Schema(
     timestamps: true,
   }
 )
+
+UserSchema.pre('save', async function (this: IUser, next: HookNextFunction) {
+  console.log(this.password)
+  const hashedPassword = await hash(this.password, 10)
+  this.password = hashedPassword
+
+  console.log(hashedPassword)
+})
 
 const UserModel: Model<IUser> = model<IUser>('User', UserSchema)
 

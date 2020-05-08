@@ -7,17 +7,19 @@ import {
   registerUser,
   removeUser,
   updateUser,
+  loginUser,
+  me,
 } from '../controllers/users'
 
 import emailExists from '../middlewares/emailExists'
 import objectId from '../middlewares/objectId'
+import { protectRoute } from '../middlewares/auth'
 
 const router = Router()
 const checkObjectId = objectId('user')
 
 router
-  .route('/')
-  .get(getAllUser)
+  .route('/register')
   .post(
     [
       check('name').trim().notEmpty().withMessage('Please provide name'),
@@ -40,10 +42,25 @@ router
   )
 
 router
+  .route('/login')
+  .post(
+    [
+      check('email').notEmpty().withMessage('Please provide email'),
+      check('password').notEmpty().withMessage('Please provide password'),
+    ],
+    loginUser
+  )
+
+router.route('/').get(getAllUser)
+
+router.route('/me').get(protectRoute, me)
+
+router
   .route('/:id')
   .get(checkObjectId, getSingleUser)
-  .delete(checkObjectId, removeUser)
+  .delete(protectRoute, checkObjectId, removeUser)
   .patch(
+    protectRoute,
     checkObjectId,
     emailExists,
     [

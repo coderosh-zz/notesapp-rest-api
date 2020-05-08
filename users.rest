@@ -3,20 +3,45 @@ GET http://localhost:3000/api/v1/users
 
 
 ### GET single user
-GET http://localhost:3000/api/v1/users/5eb4e71483a78e2b1c1e5469
+GET http://localhost:3000/api/v1/users/5eb4f3ee3f273500f4aa4ef4
 
 
 ### Register new user
-POST http://localhost:3000/api/v1/users
+POST http://localhost:3000/api/v1/users/register
 Content-Type: application/json
 
 {
   "name": "Roshan Acharya",
   "email": "test@roshan.com",
-  "password": "12345"
+  "password": "123456"
+}
+
+
+### Edit User
+PATCH http://localhost:3000/api/v1/users/5eb4f3ee3f273500f4aa4ef4
+Content-Type: application/json
+
+{
+  "name": "Roshan JI",
+  "password": "1234566",
+  "email": "roshan"
 }
 
 
 ### Remove User
-DELETE  http://localhost:3000/api/v1/users/5eb4e71583a78e2b1c1e546
+DELETE  http://localhost:3000/api/v1/users/5eb50d65aa28af2eb487e65b
 
+
+### Login User
+POST http://localhost:3000/api/v1/users/login
+Content-Type: application/json
+
+{
+  "email": "test@roshan.com",
+  "password": "123456"
+}
+
+
+### Me
+GET http://localhost:3000/api/v1/users/me
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjUwZGM2YTFiN2FjMzFiYzkyZmY2OCIsImlhdCI6MTU4ODkyOTQ3MiwiZXhwIjoxNTg5MDE1ODcyfQ.flknsvuU-mFuFoLBq5UqI8hkgSSBYfBBbg_mxPlAV90

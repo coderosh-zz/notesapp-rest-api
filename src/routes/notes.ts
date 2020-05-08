@@ -9,6 +9,7 @@ import {
   updateNote,
   deleteNote,
 } from '../controllers/notes'
+import { protectRoute } from '../middlewares/auth'
 
 const router = Router()
 const checkObjectId = objectId('note')
@@ -17,6 +18,7 @@ router
   .route('/')
   .get(getAllNotes)
   .post(
+    protectRoute,
     [
       check('title').trim().notEmpty().withMessage('Please provide title'),
       check('body').trim().notEmpty().withMessage('Please provide body'),
@@ -29,6 +31,7 @@ router
   .route('/:id')
   .get(checkObjectId, getSingleNote)
   .patch(
+    protectRoute,
     [
       check('title')
         .trim()
@@ -44,6 +47,6 @@ router
     checkObjectId,
     updateNote
   )
-  .delete(checkObjectId, deleteNote)
+  .delete(protectRoute, checkObjectId, deleteNote)
 
 export default router
