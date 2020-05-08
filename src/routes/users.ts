@@ -10,6 +10,8 @@ import {
   loginUser,
   me,
   logoutAll,
+  refreshToken,
+  logout,
 } from '../controllers/users'
 
 import emailExists from '../middlewares/emailExists'
@@ -57,6 +59,10 @@ router.route('/').get(getAllUser)
 router.route('/me').get(protectRoute, me)
 
 router.route('/logoutall').get(protectRoute, logoutAll)
+
+router.route('/token').post(refreshToken)
+
+router.route('/logout').delete(logout)
 
 router
   .route('/:id')

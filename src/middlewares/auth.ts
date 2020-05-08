@@ -18,17 +18,24 @@ const protectRoute = async (
 
     if (!token) {
       return next(
-        new CustomError('You are not authorize to access this route', 401)
+        new CustomError('You are not authorized to access this route', 401)
       )
     }
 
-    const decoded = verifyToken(token)
+    let decoded
+    try {
+      decoded = verifyToken(token)
+    } catch (e) {
+      return next(
+        new CustomError('You are not authorized to access this route', 401)
+      )
+    }
 
     const user = await User.findById(decoded.id)
 
     if (!user) {
       return next(
-        new CustomError('You are not authorize to access this route', 401)
+        new CustomError('You are not authorized to access this route', 401)
       )
     }
 
@@ -37,7 +44,7 @@ const protectRoute = async (
 
     if (validDate.getTime() > iatDate.getTime()) {
       return next(
-        new CustomError('You are not authorize to access this route', 401)
+        new CustomError('You are not authorized to access this route', 401)
       )
     }
 

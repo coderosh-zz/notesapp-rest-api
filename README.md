@@ -8,6 +8,9 @@
 - [x] Protect Routes
 - [x] Connect User and Notes
 - [x] Invalid every previous tokens after password change
-- [x] Logout All Users
-- [ ] Refresh token
+- [x] Logout From All Devices
+- [x] Refresh token
+- [ ] Cors
+- [ ] Rate Limiting
+- [ ] Prevent NOSQL injection
 - [ ] Private notes security

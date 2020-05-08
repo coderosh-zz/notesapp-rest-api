@@ -20,7 +20,7 @@ Content-Type: application/json
 ### Edit User
 PATCH http://localhost:3000/api/v1/users/5eb5431e734fff234c0d5138
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjU0MzFlNzM0ZmZmMjM0YzBkNTEzOCIsImlhdCI6MTU4ODkzNzUxMSwiZXhwIjoxNTg5MDIzOTExfQ.dVq8j-faLJOMEJByb1Tc_NbSs6dEukunKp0snN-exHs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjU0MzFlNzM0ZmZmMjM0YzBkNTEzOCIsImlhdCI6MTU4ODk0NzM1NCwiZXhwIjoxNTg4OTQ3NDE0fQ.D8uRRLnnho7XxbTBArLjpxMhsefBPgCDwPiPiVA1zSQ
 
 {
   "name": "Roshan JI",
@@ -43,9 +43,26 @@ Content-Type: application/json
 }
 
 
+### Refresh token
+POST http://localhost:3000/api/v1/users/token
+Content-Type: application/json
+
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjU0MzFlNzM0ZmZmMjM0YzBkNTEzOCIsImlhdCI6MTU4ODk0NzUyNywiZXhwIjoxNTkxNTM5NTI3fQ.dyarYATF_JyQ9RL5yKwFA39twFTwz46cVG_zxv1Ug8I"
+}
+
+
+### Logout
+DELETE http://localhost:3000/api/v1/users/logout
+Content-Type: application/json
+
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjU0MzFlNzM0ZmZmMjM0YzBkNTEzOCIsImlhdCI6MTU4ODk0NzUyNywiZXhwIjoxNTkxNTM5NTI3fQ.dyarYATF_JyQ9RL5yKwFA39twFTwz46cVG_zxv1Ug8I"
+}
+
 ### Me
 GET http://localhost:3000/api/v1/users/me
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjU0MzFlNzM0ZmZmMjM0YzBkNTEzOCIsImlhdCI6MTU4ODkzOTc4MCwiZXhwIjoxNTg5MDI2MTgwfQ.D2JDhD16UsRQP5vdIX8iMuZ9zpSeLdBTXLsYEMAqWH8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjU0MzFlNzM0ZmZmMjM0YzBkNTEzOCIsImlhdCI6MTU4ODk0NzMzNywiZXhwIjoxNTg4OTQ3Mzk3fQ.5rlSIkQqM-BEjKHpsGiqhIsBbT31Ekw_W_6EjtH5AvM
 
 
 ### Logout All

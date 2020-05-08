@@ -5,7 +5,11 @@ import Note from '../models/Note'
 import CustomError from '../models/CustomError'
 import User from '../models/User'
 
-const getAllNotes = async (req: Request, res: Response, next: NextFunction) => {
+const getAllNotes = async (
+  _req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const notes = await Note.find({})
 

@@ -4,8 +4,14 @@ import { compare, hash } from 'bcryptjs'
 
 import User from '../models/User'
 import CustomError from '../models/CustomError'
-import { generateToken } from '../utils/jwt'
+import {
+  generateToken,
+  verifyRefreshToken,
+  generateRefreshToken,
+} from '../utils/jwt'
 import Note from '../models/Note'
+
+let validRefreshTokens: string[] = []
 
 const getAllUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -109,7 +115,7 @@ const updateUser = async (req: Request, res: Response, next: NextFunction) => {
 
     let updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
-    })
+    }).select('-password')
 
     res.json({ success: true, user: updatedUser })
   } catch (e) {
@@ -137,8 +143,10 @@ const loginUser = async (req: Request, res: Response, next: NextFunction) => {
     }
 
     const token = generateToken(user.id)
+    const refreshToken = generateRefreshToken(user.id)
+    validRefreshTokens.push(refreshToken)
 
-    res.json({ success: true, token })
+    res.json({ success: true, token, refresh: refreshToken })
   } catch (e) {
     next(new CustomError("Something went wrong, couldn't login user", 500))
   }
@@ -173,6 +181,66 @@ const logoutAll = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
+const refreshToken = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const rToken = req.body.token
+
+    if (!rToken) {
+      return next(new CustomError('Please provide refresh token', 400))
+    }
+
+    let decoded
+    try {
+      decoded = verifyRefreshToken(rToken)
+    } catch (e) {
+      return next(new CustomError('Refresh token not valid', 401))
+    }
+
+    const user = await User.findById(decoded.id)
+
+    if (!user) {
+      return next(new CustomError('Refresh token not valid', 401))
+    }
+
+    const validDate = new Date(user.validDate)
+    const iatDate = new Date(parseInt(decoded.iat) * 1000)
+
+    if (validDate.getTime() > iatDate.getTime()) {
+      return next(new CustomError('Refresh token not valid', 401))
+    }
+
+    if (!validRefreshTokens.includes(rToken)) {
+      return next(new CustomError('Refresh token not valid', 401))
+    }
+
+    const newToken = generateToken(decoded.id)
+
+    res.json({ success: true, token: newToken })
+  } catch (e) {
+    next(new CustomError('Something went wrong', 500))
+  }
+}
+
+const logout = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const rToken = req.body.token
+
+    if (!rToken) {
+      return next(new CustomError('Please provide refresh token', 400))
+    }
+
+    validRefreshTokens = validRefreshTokens.filter(rt => rt != rToken)
+
+    res.json({ success: true })
+  } catch (e) {
+    throw new CustomError('Server Error', 500)
+  }
+}
+
 export {
   getAllUser,
   getSingleUser,
@@ -182,4 +250,6 @@ export {
   loginUser,
   me,
   logoutAll,
+  refreshToken,
+  logout,
 }
