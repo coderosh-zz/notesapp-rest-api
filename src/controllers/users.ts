@@ -155,6 +155,24 @@ const me = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
+const logoutAll = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const uid = req.uid
+    const user = await User.findById(uid)
+    const date = new Date().getTime() - 1000
+    if (!user) {
+      return next(new CustomError('Something went wrong', 500))
+    }
+    await user.update({ validDate: new Date(date) })
+
+    const token = generateToken(req.uid)
+
+    res.json({ success: true, token })
+  } catch (e) {
+    next(new CustomError('Something went wrong', 500))
+  }
+}
+
 export {
   getAllUser,
   getSingleUser,
@@ -163,4 +181,5 @@ export {
   updateUser,
   loginUser,
   me,
+  logoutAll,
 }

@@ -9,6 +9,7 @@ import {
   updateUser,
   loginUser,
   me,
+  logoutAll,
 } from '../controllers/users'
 
 import emailExists from '../middlewares/emailExists'
@@ -54,6 +55,8 @@ router
 router.route('/').get(getAllUser)
 
 router.route('/me').get(protectRoute, me)
+
+router.route('/logoutall').get(protectRoute, logoutAll)
 
 router
   .route('/:id')

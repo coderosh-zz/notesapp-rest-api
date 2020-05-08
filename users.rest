@@ -45,4 +45,9 @@ Content-Type: application/json
 
 ### Me
 GET http://localhost:3000/api/v1/users/me
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjU0MzFlNzM0ZmZmMjM0YzBkNTEzOCIsImlhdCI6MTU4ODkzNzU2NywiZXhwIjoxNTg5MDIzOTY3fQ.hDk_1oPQxkBA5mwfH1ImYO5BcjmKuZirtoEd35jKhk8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjU0MzFlNzM0ZmZmMjM0YzBkNTEzOCIsImlhdCI6MTU4ODkzOTc4MCwiZXhwIjoxNTg5MDI2MTgwfQ.D2JDhD16UsRQP5vdIX8iMuZ9zpSeLdBTXLsYEMAqWH8
+
+
+### Logout All
+GET http://localhost:3000/api/v1/users/logoutall
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjU0MzFlNzM0ZmZmMjM0YzBkNTEzOCIsImlhdCI6MTU4ODkzOTc2MSwiZXhwIjoxNTg5MDI2MTYxfQ.PFn8x5b1-C5xw8wKS_BZiyag--62T3PjYMjYvbDv1Xs
