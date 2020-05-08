@@ -10,7 +10,33 @@
 - [x] Invalid every previous tokens after password change
 - [x] Logout From All Devices
 - [x] Refresh token
-- [ ] Cors
-- [ ] Rate Limiting
-- [ ] Prevent NOSQL injection
+- [x] Prevent NOSQL injection
+- [x] Security headers and xss
+- [x] HPP Attacks
+- [x] Cors
+- [x] Rate Limiting
 - [ ] Private notes security
+- [ ] Searching
+- [ ] Pagination
+
+### Success Response format
+
+```json
+{
+  "success": true,
+  "...": ...
+}
+```
+
+### Error Response format
+
+```json
+{
+  "success": false,
+  "errors": [
+    {
+      ...
+    }
+  ]
+}
+```
