@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
 import { validationResult } from 'express-validator'
+import mongoose from 'mongoose'
 
 import Note from '../models/Note'
 import CustomError from '../models/CustomError'
@@ -10,7 +11,7 @@ const getAllNotes = async (req: Request, res: Response, next: NextFunction) => {
 
     res.send({ success: true, notes })
   } catch (e) {
-    next(new CustomError('Server Error', 500))
+    next(new CustomError('Something went wrong', 500))
   }
 }
 
@@ -53,6 +54,11 @@ const createNote = async (req: Request, res: Response, next: NextFunction) => {
 
 const updateNote = async (req: Request, res: Response, next: NextFunction) => {
   try {
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      return res.status(400).send({ success: false, errors: errors.array() })
+    }
+
     const note = await Note.findById(req.params.id)
 
     if (!note) {

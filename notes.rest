@@ -1,3 +1,4 @@
+### Get All Notes
 GET http://localhost:3000/api/v1/notes
 
 
@@ -17,11 +18,11 @@ Content-Type: application/json
 
 
 ### Update Note
-PATCH http://localhost:3000/api/v1/notes/5eb42477f2906a1b48593e99
+PATCH http://localhost:3000/api/v1/notes/5eb426a1f2e80f18380ee2b7
 Content-Type: application/json
 
 {
-  "body": "this is a edited body from patch req"
+  "body": "this is a private body from patch req ok"
 }
 
 ### Delete Note
