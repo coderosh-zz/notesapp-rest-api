@@ -3,7 +3,7 @@ GET http://localhost:3000/api/v1/users
 
 
 ### GET single user
-GET http://localhost:3000/api/v1/users/5eb4f3ee3f273500f4aa4ef4
+GET http://localhost:3000/api/v1/users/5eb53a9ad2418619a058fd6b
 
 
 ### Register new user
@@ -18,19 +18,19 @@ Content-Type: application/json
 
 
 ### Edit User
-PATCH http://localhost:3000/api/v1/users/5eb4f3ee3f273500f4aa4ef4
+PATCH http://localhost:3000/api/v1/users/5eb5431e734fff234c0d5138
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjU0MzFlNzM0ZmZmMjM0YzBkNTEzOCIsImlhdCI6MTU4ODkzNzUxMSwiZXhwIjoxNTg5MDIzOTExfQ.dVq8j-faLJOMEJByb1Tc_NbSs6dEukunKp0snN-exHs
 
 {
   "name": "Roshan JI",
-  "password": "123456",
-  "email": "roshan"
+  "password": "1234567"
 }
 
 
 ### Remove User
-DELETE  http://localhost:3000/api/v1/users/5eb536aecc4d641fac001b48
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjUzNmFlY2M0ZDY0MWZhYzAwMWI0OCIsImlhdCI6MTU4ODkzNDM0NCwiZXhwIjoxNTg5MDIwNzQ0fQ.QX3e_-_MZVjqXqZyCanMQ-8XrH-dL8MREOLDwiqy_b4
+DELETE  http://localhost:3000/api/v1/users/5eb53a9ad2418619a058fd6b
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjUzYTlhZDI0MTg2MTlhMDU4ZmQ2YiIsImlhdCI6MTU4ODkzNTQyNSwiZXhwIjoxNTg5MDIxODI1fQ.uKgKEQDJ1LirlIFdxuJZQ8rFg6ya62dq2Fc57eOzPOY
 
 
 ### Login User
@@ -38,11 +38,11 @@ POST http://localhost:3000/api/v1/users/login
 Content-Type: application/json
 
 {
-   "email": "test@roshan.com",
-  "password": "123456"
+  "email": "test@roshan.com",
+  "password": "1234567"
 }
 
 
 ### Me
 GET http://localhost:3000/api/v1/users/me
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjUzNmFlY2M0ZDY0MWZhYzAwMWI0OCIsImlhdCI6MTU4ODkzNDM0NCwiZXhwIjoxNTg5MDIwNzQ0fQ.QX3e_-_MZVjqXqZyCanMQ-8XrH-dL8MREOLDwiqy_b4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjU0MzFlNzM0ZmZmMjM0YzBkNTEzOCIsImlhdCI6MTU4ODkzNzU2NywiZXhwIjoxNTg5MDIzOTY3fQ.hDk_1oPQxkBA5mwfH1ImYO5BcjmKuZirtoEd35jKhk8

@@ -31,6 +31,16 @@ const protectRoute = async (
         new CustomError('You are not authorize to access this route', 401)
       )
     }
+
+    const validDate = new Date(user.validDate)
+    const iatDate = new Date(parseInt(decoded.iat) * 1000)
+
+    if (validDate.getTime() > iatDate.getTime()) {
+      return next(
+        new CustomError('You are not authorize to access this route', 401)
+      )
+    }
+
     req.uid = decoded.id
     next()
   } catch (e) {

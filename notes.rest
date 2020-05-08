@@ -9,7 +9,7 @@ GET http://localhost:3000/api/v1/notes/5eb426a1f2e80f18380ee2b7
 ### Create Note
 POST http://localhost:3000/api/v1/notes
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjUzNmFlY2M0ZDY0MWZhYzAwMWI0OCIsImlhdCI6MTU4ODkzNDMxOSwiZXhwIjoxNTg5MDIwNzE5fQ.oSCzjopmNT7ORNlndxsNqVtrXWGRVD91-D_7UcYVqkg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjUzYTlhZDI0MTg2MTlhMDU4ZmQ2YiIsImlhdCI6MTU4ODkzNTMyMiwiZXhwIjoxNTg5MDIxNzIyfQ.B1Db_wojv-dLeMdCyQ-kMOXlYcC4OPAemjQkRQDQIBI
 
 {
   "body": "This is a body hai ta -2",
@@ -28,5 +28,5 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjUyOWYxM
 }
 
 ### Delete Note
-DELETE http://localhost:3000/api/v1/notes/5eb53008ae3bbd32140767d0
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjUyZmU3YWUzYmJkMzIxNDA3NjdjZiIsImlhdCI6MTU4ODkzMjU4MywiZXhwIjoxNTg5MDE4OTgzfQ.9BUbzXNqw7NtWZyXZLVKIDSbQcx3gFQwWImQ_JLtBD4
+DELETE http://localhost:3000/api/v1/notes/5eb53aadd2418619a058fd6c
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjUzYTlhZDI0MTg2MTlhMDU4ZmQ2YiIsImlhdCI6MTU4ODkzNTMyMiwiZXhwIjoxNTg5MDIxNzIyfQ.B1Db_wojv-dLeMdCyQ-kMOXlYcC4OPAemjQkRQDQIBI

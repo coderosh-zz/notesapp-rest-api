@@ -1,10 +1,11 @@
 import { NextFunction, Request, Response } from 'express'
 import { validationResult } from 'express-validator'
-import { compare } from 'bcryptjs'
+import { compare, hash } from 'bcryptjs'
 
 import User from '../models/User'
 import CustomError from '../models/CustomError'
 import { generateToken } from '../utils/jwt'
+import Note from '../models/Note'
 
 const getAllUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -67,13 +68,19 @@ const removeUser = async (req: Request, res: Response, next: NextFunction) => {
       )
     }
 
-    if (user.id !== req.uid) {
+    if (user.id != req.uid) {
       return next(
         new CustomError(`You aren't authorized to acces this route`, 401)
       )
     }
 
     await User.findByIdAndDelete(req.params.id)
+
+    const notes = user.notes
+
+    for (const noteId of notes) {
+      await Note.findByIdAndDelete(noteId)
+    }
 
     res.json({ success: true, user: [] })
   } catch (e) {
@@ -93,6 +100,11 @@ const updateUser = async (req: Request, res: Response, next: NextFunction) => {
       return next(
         new CustomError(`No user with the id of ${req.params.id} found`, 404)
       )
+    }
+
+    if (req.body.password) {
+      req.body.validDate = new Date()
+      req.body.password = await hash(req.body.password, 10)
     }
 
     let updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {

@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from 'express'
 import { validationResult } from 'express-validator'
-import mongoose from 'mongoose'
 
 import Note from '../models/Note'
 import CustomError from '../models/CustomError'
@@ -81,7 +80,7 @@ const updateNote = async (req: Request, res: Response, next: NextFunction) => {
       )
     }
 
-    if (note.creator !== req.uid) {
+    if (note.creator != req.uid) {
       return next(
         new CustomError(`You don't have permission to edit this note`, 401)
       )
@@ -107,7 +106,7 @@ const deleteNote = async (req: Request, res: Response, next: NextFunction) => {
       )
     }
 
-    if (note.creator !== req.uid) {
+    if (note.creator != req.uid) {
       return next(
         new CustomError(`You don't have permission to delete this note`, 401)
       )
@@ -118,13 +117,13 @@ const deleteNote = async (req: Request, res: Response, next: NextFunction) => {
     const user = await User.findById(req.uid)
 
     if (user) {
-      let notes = user.notes.filter(noteId => noteId !== req.params.id)
-      user.notes = notes
+      let notes = user.notes.filter(noteId => noteId != req.params.id)
       await user.update({ notes })
     }
 
     res.send({ success: true, note: [] })
   } catch (e) {
+    console.log(e)
     next(new CustomError("Something went wrong, couldn't delete note", 500))
   }
 }

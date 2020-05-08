@@ -4,7 +4,6 @@ import {
   model,
   Model,
   HookNextFunction,
-  mongo,
   Types,
 } from 'mongoose'
 import { hash } from 'bcryptjs'
@@ -13,7 +12,7 @@ interface IUser extends Document {
   name: string
   email: string
   password: string
-  passwordLastUpdated: Date
+  validDate: Date
   notes: any[]
 }
 
@@ -51,11 +50,8 @@ const UserSchema = new Schema(
 )
 
 UserSchema.pre('save', async function (this: IUser, next: HookNextFunction) {
-  console.log(this.password)
   const hashedPassword = await hash(this.password, 10)
   this.password = hashedPassword
-
-  console.log(hashedPassword)
 })
 
 const UserModel: Model<IUser> = model<IUser>('User', UserSchema)
