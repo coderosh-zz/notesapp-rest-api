@@ -1,19 +1,13 @@
 import { NextFunction, Request, Response } from 'express'
 import { validationResult } from 'express-validator'
-import { compare, hash } from 'bcryptjs'
+import { hash } from 'bcryptjs'
 
 import User from '../models/User'
 import CustomError from '../models/CustomError'
-import {
-  generateToken,
-  verifyRefreshToken,
-  generateRefreshToken,
-} from '../utils/jwt'
+
 import Note from '../models/Note'
 
-let validRefreshTokens: string[] = []
-
-const getAllUser = async (req: Request, res: Response, next: NextFunction) => {
+const getAllUser = async (_req: Request, res: Response, next: NextFunction) => {
   try {
     const users = await User.find({}).select('-password')
 

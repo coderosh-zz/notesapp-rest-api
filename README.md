@@ -16,9 +16,10 @@
 - [x] Cors
 - [x] Rate Limiting
 - [x] Private notes security
-- [ ] Searching
-- [ ] Limit results
-- [ ] Pagination
+- [x] Selecting
+- [x] Sorting
+- [x] Limit results
+- [x] Pagination
 
 ### Success Response format 🤗
 

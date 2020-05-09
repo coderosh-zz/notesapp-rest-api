@@ -5,15 +5,78 @@ import Note from '../models/Note'
 import CustomError from '../models/CustomError'
 import User from '../models/User'
 
-const getAllNotes = async (
-  _req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    const notes = await Note.find({ isPrivate: false })
+interface pagination {
+  next?: {
+    page: number
+    limit: number
+  }
+  prev?: {
+    page: number
+    limit: number
+  }
+}
 
-    res.send({ success: true, notes })
+const getAllNotes = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const queryParams = { ...req.query }
+    const exclude = ['select', 'isPrivate', 'sort', 'limit', 'page']
+    exclude.forEach(p => delete queryParams[p])
+
+    let notesQuery = Note.find({ ...queryParams, isPrivate: false })
+
+    if (req.query.select) {
+      const requiredFields = req.query.select.toString().split(',').join(' ')
+      notesQuery = notesQuery.select(requiredFields)
+    }
+
+    if (req.query.sort) {
+      const sortBy = req.query.sort.toString().split(',').join(' ')
+      notesQuery = notesQuery.sort(sortBy)
+    } else {
+      notesQuery = notesQuery.sort('-createAt')
+    }
+
+    let page: number
+    let limit: number
+
+    if (req.query.page) {
+      page = parseInt(req.query.page.toString(), 10)
+    } else {
+      page = 1
+    }
+
+    if (req.query.limit) {
+      limit = parseInt(req.query.limit.toString(), 10)
+    } else {
+      limit = 10
+    }
+
+    const total = await Note.count({ isPrivate: false })
+
+    const start: number = (page - 1) * limit
+    const end: number = page * limit
+
+    notesQuery = notesQuery.skip(start).limit(limit)
+
+    const notes = await notesQuery
+
+    const pagination: pagination = {}
+    console.log(total)
+    if (end < total) {
+      pagination.next = {
+        page: page + 1,
+        limit,
+      }
+    }
+
+    if (start > 0) {
+      pagination.prev = {
+        page: page - 1,
+        limit,
+      }
+    }
+
+    res.send({ success: true, pagination, notes })
   } catch (e) {
     next(new CustomError('Something went wrong', 500))
   }
