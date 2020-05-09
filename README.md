@@ -15,7 +15,7 @@
 - [x] HPP Attacks
 - [x] Cors
 - [x] Rate Limiting
-- [ ] Private notes security
+- [x] Private notes security
 - [ ] Searching
 - [ ] Limit results
 - [ ] Pagination

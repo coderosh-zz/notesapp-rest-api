@@ -11,7 +11,7 @@ const getAllNotes = async (
   next: NextFunction
 ) => {
   try {
-    const notes = await Note.find({})
+    const notes = await Note.find({ isPrivate: false })
 
     res.send({ success: true, notes })
   } catch (e) {
@@ -25,7 +25,7 @@ const getSingleNote = async (
   next: NextFunction
 ) => {
   try {
-    const note = await Note.findOne({ _id: req.params.id })
+    const note = await Note.findOne({ _id: req.params.id, isPrivate: false })
 
     if (!note) {
       return next(

@@ -1,9 +1,9 @@
 @url=http://localhost:3000/api/v1/notes
 
 
-@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjYyM2Y3MTM1YzEwMWU4YzYwNTJjZSIsImlhdCI6MTU4ODk5NTExNCwiZXhwIjoxNTg4OTk2MDE0fQ.OPzkxy2NUzG58XCNpmAvWLwZznGyDwoatg8PONe3lb8
+@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjYyYjUxNGE2ZWY2MTQ4NGY4ZjdiOSIsImlhdCI6MTU4ODk5NzQzMiwiZXhwIjoxNTg4OTk4MzMyfQ.-1lp8m-GH4oxfAik8cf9SPUAjgdFcn2faH-JIGt3zBs
 
-@nid = 5eb62487135c101e8c6052cf
+@nid = 5eb62d4b7425183abc55d2fa
 
 ### Get All Notes
 GET {{url}}
@@ -21,7 +21,7 @@ Authorization: Bearer {{authToken}}
 {
   "body": "This is a body hai ta -2",
   "title": "This is a private title",
-  "isPrivate": true
+  "isPrivate": false
 }
 
 

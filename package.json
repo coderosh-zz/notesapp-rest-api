@@ -23,9 +23,7 @@
     "hpp": "^0.2.3",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.12",
-    "morgan": "^1.10.0"
-  },
-  "devDependencies": {
+    "morgan": "^1.10.0",
     "@types/bcryptjs": "^2.4.2",
     "@types/cors": "^2.8.6",
     "@types/express": "^4.17.6",
@@ -36,7 +34,9 @@
     "@types/jsonwebtoken": "^8.3.9",
     "@types/mongoose": "^5.7.15",
     "@types/morgan": "^1.9.0",
-    "@types/node": "^13.13.5",
+    "@types/node": "^13.13.5"
+  },
+  "devDependencies": {
     "ts-node-dev": "^1.0.0-pre.44",
     "typescript": "^3.8.3"
   }

@@ -1,8 +1,8 @@
 @url=http://localhost:3000/api/v1/users
 
-@authToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjYyM2Y3MTM1YzEwMWU4YzYwNTJjZSIsImlhdCI6MTU4ODk5NTExNCwiZXhwIjoxNTg4OTk2MDE0fQ.OPzkxy2NUzG58XCNpmAvWLwZznGyDwoatg8PONe3lb8
+@authToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjYyYjUxNGE2ZWY2MTQ4NGY4ZjdiOSIsImlhdCI6MTU4ODk5ODA3MiwiZXhwIjoxNTg4OTk4OTcyfQ.HGllMNQ0UeYBqlNlB5lFyA3M1y8O3CB72Lvds1k4yNM
 
-@uid = 5eb623f7135c101e8c6052ce
+@uid = 5eb62b514a6ef61484f8f7b9
 
 ### GET all users
 GET {{url}}
@@ -34,3 +34,7 @@ Authorization: Bearer {{authToken}}
 GET {{url}}/me
 Authorization: Bearer {{authToken}}
 
+
+### Notes By User
+GET {{url}}/notes
+Authorization: Bearer {{authToken}}

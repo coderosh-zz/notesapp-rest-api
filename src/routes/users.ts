@@ -7,6 +7,7 @@ import {
   removeUser,
   updateUser,
   me,
+  notesByUser,
 } from '../controllers/users'
 
 import emailExists from '../middlewares/emailExists'
@@ -19,6 +20,8 @@ const checkObjectId = objectId('user')
 router.route('/').get(getAllUser)
 
 router.route('/me').get(protectRoute, me)
+
+router.route('/notes').get(protectRoute, notesByUser)
 
 router
   .route('/:id')
