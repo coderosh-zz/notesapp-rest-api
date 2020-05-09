@@ -10,6 +10,7 @@ import connectDatabase from './config/db'
 import errorMiddleware from './middlewares/error'
 import notes from './routes/notes'
 import users from './routes/users'
+import auth from './routes/auth'
 
 const app = express()
 app.use(express.json())
@@ -40,6 +41,7 @@ app.use(
 // Routes
 app.use('/api/v1/notes', notes)
 app.use('/api/v1/users', users)
+app.use('/api/v1/auth', auth)
 
 // Error Handling Middleware
 app.use(errorMiddleware)

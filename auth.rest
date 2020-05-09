@@ -1,0 +1,50 @@
+@url = http://localhost:3000/api/v1/auth
+@refresh = {{login.response.body.refresh}}
+
+
+### Register new user
+# @name register
+POST {{url}}/register
+Content-Type: application/json
+
+{
+  "name": "Roshan Acharya",
+  "email": "test@roshany.com",
+  "password": "123456"
+}
+
+
+### Login User
+# @name login
+POST {{url}}/login
+Content-Type: application/json
+
+{
+  "email": "test@roshan.com",
+  "password": "123456"
+}
+
+
+
+### Refresh token
+POST {{url}}/token
+Content-Type: application/json
+
+{
+  "token": "{{refresh}}"
+}
+
+
+### Logout
+DELETE {{url}}/logout
+Content-Type: application/json
+
+{
+  "token": "{{refresh}}"
+}
+
+
+
+### Logout All
+GET {{url}}/logoutall
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjU0MzFlNzM0ZmZmMjM0YzBkNTEzOCIsImlhdCI6MTU4ODkzOTc2MSwiZXhwIjoxNTg5MDI2MTYxfQ.PFn8x5b1-C5xw8wKS_BZiyag--62T3PjYMjYvbDv1Xs

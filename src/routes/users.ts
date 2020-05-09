@@ -4,14 +4,9 @@ import { check } from 'express-validator'
 import {
   getAllUser,
   getSingleUser,
-  registerUser,
   removeUser,
   updateUser,
-  loginUser,
   me,
-  logoutAll,
-  refreshToken,
-  logout,
 } from '../controllers/users'
 
 import emailExists from '../middlewares/emailExists'
@@ -21,48 +16,9 @@ import { protectRoute } from '../middlewares/auth'
 const router = Router()
 const checkObjectId = objectId('user')
 
-router
-  .route('/register')
-  .post(
-    [
-      check('name').trim().notEmpty().withMessage('Please provide name'),
-      check('email')
-        .trim()
-        .notEmpty()
-        .withMessage('Please provide email')
-        .isEmail()
-        .withMessage('Please provide valid email')
-        .normalizeEmail(),
-      check('password')
-        .trim()
-        .notEmpty()
-        .withMessage('Please provide password')
-        .isLength({ min: 6 })
-        .withMessage('Password should have more than 5 characters'),
-    ],
-    emailExists,
-    registerUser
-  )
-
-router
-  .route('/login')
-  .post(
-    [
-      check('email').notEmpty().withMessage('Please provide email'),
-      check('password').notEmpty().withMessage('Please provide password'),
-    ],
-    loginUser
-  )
-
 router.route('/').get(getAllUser)
 
 router.route('/me').get(protectRoute, me)
-
-router.route('/logoutall').get(protectRoute, logoutAll)
-
-router.route('/token').post(refreshToken)
-
-router.route('/logout').delete(logout)
 
 router
   .route('/:id')

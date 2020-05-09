@@ -1,26 +1,22 @@
+@url=http://localhost:3000/api/v1/users
+
+@authToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjYyM2Y3MTM1YzEwMWU4YzYwNTJjZSIsImlhdCI6MTU4ODk5NTExNCwiZXhwIjoxNTg4OTk2MDE0fQ.OPzkxy2NUzG58XCNpmAvWLwZznGyDwoatg8PONe3lb8
+
+@uid = 5eb623f7135c101e8c6052ce
+
 ### GET all users
-GET http://localhost:3000/api/v1/users
+GET {{url}}
 
 
 ### GET single user
-GET http://localhost:3000/api/v1/users/5eb53a9ad2418619a058fd6b
+GET {{url}}/{{uid}}
 
-
-### Register new user
-POST http://localhost:3000/api/v1/users/register
-Content-Type: application/json
-
-{
-  "name": "Roshan Acharya",
-  "email": "test@roshan.com",
-  "password": "123456"
-}
 
 
 ### Edit User
-PATCH http://localhost:3000/api/v1/users/5eb5431e734fff234c0d5138
+PATCH {{url}}/{{uid}}
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjU0MzFlNzM0ZmZmMjM0YzBkNTEzOCIsImlhdCI6MTU4ODk0NzM1NCwiZXhwIjoxNTg4OTQ3NDE0fQ.D8uRRLnnho7XxbTBArLjpxMhsefBPgCDwPiPiVA1zSQ
+Authorization: Bearer {{authToken}}
 
 {
   "name": "Roshan JI",
@@ -29,42 +25,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjU0MzFlN
 
 
 ### Remove User
-DELETE  http://localhost:3000/api/v1/users/5eb53a9ad2418619a058fd6b
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjUzYTlhZDI0MTg2MTlhMDU4ZmQ2YiIsImlhdCI6MTU4ODkzNTQyNSwiZXhwIjoxNTg5MDIxODI1fQ.uKgKEQDJ1LirlIFdxuJZQ8rFg6ya62dq2Fc57eOzPOY
+DELETE  {{url}}/{{uid}}
+Authorization: Bearer {{authToken}}
 
 
-### Login User
-POST http://localhost:3000/api/v1/users/login
-Content-Type: application/json
-
-{
-  "email": "test@roshan.com",
-  "password": "1234567"
-}
-
-
-### Refresh token
-POST http://localhost:3000/api/v1/users/token
-Content-Type: application/json
-
-{
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjU0MzFlNzM0ZmZmMjM0YzBkNTEzOCIsImlhdCI6MTU4ODk0NzUyNywiZXhwIjoxNTkxNTM5NTI3fQ.dyarYATF_JyQ9RL5yKwFA39twFTwz46cVG_zxv1Ug8I"
-}
-
-
-### Logout
-DELETE http://localhost:3000/api/v1/users/logout
-Content-Type: application/json
-
-{
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjU0MzFlNzM0ZmZmMjM0YzBkNTEzOCIsImlhdCI6MTU4ODk0NzUyNywiZXhwIjoxNTkxNTM5NTI3fQ.dyarYATF_JyQ9RL5yKwFA39twFTwz46cVG_zxv1Ug8I"
-}
 
 ### Me
-GET http://localhost:3000/api/v1/users/me
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjU0MzFlNzM0ZmZmMjM0YzBkNTEzOCIsImlhdCI6MTU4ODk0NzMzNywiZXhwIjoxNTg4OTQ3Mzk3fQ.5rlSIkQqM-BEjKHpsGiqhIsBbT31Ekw_W_6EjtH5AvM
+GET {{url}}/me
+Authorization: Bearer {{authToken}}
 
-
-### Logout All
-GET http://localhost:3000/api/v1/users/logoutall
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjU0MzFlNzM0ZmZmMjM0YzBkNTEzOCIsImlhdCI6MTU4ODkzOTc2MSwiZXhwIjoxNTg5MDI2MTYxfQ.PFn8x5b1-C5xw8wKS_BZiyag--62T3PjYMjYvbDv1Xs

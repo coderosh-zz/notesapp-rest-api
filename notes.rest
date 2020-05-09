@@ -1,15 +1,22 @@
+@url=http://localhost:3000/api/v1/notes
+
+
+@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjYyM2Y3MTM1YzEwMWU4YzYwNTJjZSIsImlhdCI6MTU4ODk5NTExNCwiZXhwIjoxNTg4OTk2MDE0fQ.OPzkxy2NUzG58XCNpmAvWLwZznGyDwoatg8PONe3lb8
+
+@nid = 5eb62487135c101e8c6052cf
+
 ### Get All Notes
-GET http://localhost:3000/api/v1/notes
+GET {{url}}
 
 
 ### Get single note
-GET http://localhost:3000/api/v1/notes/5eb426a1f2e80f18380ee2b7
+GET {{url}}/{{nid}}
 
 
 ### Create Note
-POST http://localhost:3000/api/v1/notes
+POST {{url}}
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjUzYTlhZDI0MTg2MTlhMDU4ZmQ2YiIsImlhdCI6MTU4ODkzNTMyMiwiZXhwIjoxNTg5MDIxNzIyfQ.B1Db_wojv-dLeMdCyQ-kMOXlYcC4OPAemjQkRQDQIBI
+Authorization: Bearer {{authToken}}
 
 {
   "body": "This is a body hai ta -2",
@@ -19,14 +26,14 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjUzYTlhZ
 
 
 ### Update Note
-PATCH http://localhost:3000/api/v1/notes/5eb426a1f2e80f18380ee2b7
+PATCH {{url}}/{{nid}}
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjUyOWYxMTk5YTk1MDg2Y2VhMDcxOSIsImlhdCI6MTU4ODkzMTA1NywiZXhwIjoxNTg5MDE3NDU3fQ.X6UKWPJ2nLehmqb1TLhNZoWkNDNtRDwGuriJt79mDN4
+Authorization: Bearer {{authToken}}
 
 {
   "body": "this is a private body from patch req ok"
 }
 
 ### Delete Note
-DELETE http://localhost:3000/api/v1/notes/5eb53aadd2418619a058fd6c
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjUzYTlhZDI0MTg2MTlhMDU4ZmQ2YiIsImlhdCI6MTU4ODkzNTMyMiwiZXhwIjoxNTg5MDIxNzIyfQ.B1Db_wojv-dLeMdCyQ-kMOXlYcC4OPAemjQkRQDQIBI
+DELETE {{url}}/{{nid}}
+Authorization: Bearer {{authToken}}
