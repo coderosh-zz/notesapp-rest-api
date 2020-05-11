@@ -1,16 +1,18 @@
 import CustomError from '../models/CustomError'
 import { NextFunction, Request, Response } from 'express'
 import { validationResult } from 'express-validator'
+
 import {
   generateToken,
   generateRefreshToken,
   verifyRefreshToken,
 } from '../utils/jwt'
+import { filterRedis, getRedis, pushRedis } from '../utils/redis'
 
 import User from '../models/User'
 import { compare } from 'bcryptjs'
 
-let validRefreshTokens: string[] = []
+// let validRefreshTokens: string[] = []
 
 const registerUser = async (
   req: Request,
@@ -28,7 +30,8 @@ const registerUser = async (
 
     const token = generateToken(user.id)
     const refreshToken = generateRefreshToken(user.id)
-    validRefreshTokens.push(refreshToken)
+    // validRefreshTokens.push(refreshToken)
+    pushRedis(refreshToken)
 
     res.status(201).json({ success: true, token, refresh: refreshToken })
   } catch (e) {
@@ -57,7 +60,9 @@ const loginUser = async (req: Request, res: Response, next: NextFunction) => {
 
     const token = generateToken(user.id)
     const refreshToken = generateRefreshToken(user.id)
-    validRefreshTokens.push(refreshToken)
+    // validRefreshTokens.push(refreshToken)
+
+    pushRedis(refreshToken)
 
     res.json({ success: true, token, refresh: refreshToken })
   } catch (e) {
@@ -115,7 +120,9 @@ const refreshToken = async (
       return next(new CustomError('Refresh token not valid', 401))
     }
 
-    if (!validRefreshTokens.includes(rToken)) {
+    const validToken = await getRedis()
+
+    if (!validToken.includes(rToken)) {
       return next(new CustomError('Refresh token not valid', 401))
     }
 
@@ -135,7 +142,8 @@ const logout = async (req: Request, res: Response, next: NextFunction) => {
       return next(new CustomError('Please provide refresh token', 400))
     }
 
-    validRefreshTokens = validRefreshTokens.filter(rt => rt != rToken)
+    // validRefreshTokens = validRefreshTokens.filter(rt => rt != rToken)
+    filterRedis(rToken)
 
     res.json({ success: true })
   } catch (e) {

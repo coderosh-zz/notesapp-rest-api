@@ -20,6 +20,11 @@
 - [x] Sorting
 - [x] Limit results
 - [x] Pagination
+- [ ] Set Refresh Tokens in redis c
+
+## Later
+
+- [ ] Client
 
 ### Success Response format 🤗
 
