@@ -20,7 +20,7 @@
 - [x] Sorting
 - [x] Limit results
 - [x] Pagination
-- [ ] Set Refresh Tokens in redis c
+- [x] Set Refresh Tokens in redis c
 
 ## Later
 
