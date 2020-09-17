@@ -14,7 +14,7 @@ GET {{url}}/{{uid}}
 
 
 ### Edit User
-PATCH {{url}}/{{uid}}
+PATCH {{url}}/me
 Content-Type: application/json
 Authorization: Bearer {{authToken}}
 
@@ -25,9 +25,8 @@ Authorization: Bearer {{authToken}}
 
 
 ### Remove User
-DELETE  {{url}}/{{uid}}
+DELETE  {{url}}/me
 Authorization: Bearer {{authToken}}
-
 
 
 ### Me

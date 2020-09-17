@@ -1,5 +1,5 @@
-import { Router } from 'express'
-import { check } from 'express-validator'
+import { Router } from "express";
+import { check } from "express-validator";
 
 import {
   getAllUser,
@@ -8,52 +8,52 @@ import {
   updateUser,
   me,
   notesByUser,
-} from '../controllers/users'
+} from "../controllers/users";
 
-import emailExists from '../middlewares/emailExists'
-import objectId from '../middlewares/objectId'
-import { protectRoute } from '../middlewares/auth'
+import emailExists from "../middlewares/emailExists";
+import objectId from "../middlewares/objectId";
+import { protectRoute } from "../middlewares/auth";
 
-const router = Router()
-const checkObjectId = objectId('user')
+const router = Router();
+const checkObjectId = objectId("user");
 
-router.route('/').get(getAllUser)
+router.route("/").get(getAllUser);
 
-router.route('/me').get(protectRoute, me)
-
-router.route('/notes').get(protectRoute, notesByUser)
+router.route("/notes").get(protectRoute, notesByUser);
 
 router
-  .route('/:id')
-  .get(checkObjectId, getSingleUser)
+  .route("/me")
+  .get(protectRoute, me)
   .delete(protectRoute, checkObjectId, removeUser)
   .patch(
     protectRoute,
     checkObjectId,
     emailExists,
     [
-      check('name')
+      check("name")
         .trim()
         .optional()
         .notEmpty()
         .withMessage("Name can't be empty"),
-      check('email')
+      check("email")
         .trim()
         .optional()
         .notEmpty()
         .withMessage("Email can't be empty")
         .isEmail()
-        .withMessage('Please provide valid email')
+        .withMessage("Please provide valid email")
         .normalizeEmail(),
-      check('password')
+      check("password")
         .trim()
         .optional()
         .notEmpty()
         .withMessage("Password can't be empty")
         .isLength({ min: 6 })
-        .withMessage('Password should have more than 5 characters'),
+        .withMessage("Password should have more than 5 characters"),
     ],
     updateUser
-  )
+  );
 
-export default router
+router.get("/:id", checkObjectId, getSingleUser);
+
+export default router;
